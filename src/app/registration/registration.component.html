@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="stepper-header-container">
+    <div class="nav-icon-container" matRipple [ngClass]="{'disabled': stepper.selectedIndex === 0}" (click)="prevStep(stepper)">
+      <div class="nav-icon">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </div>
+    </div>
+    <ng-container *ngFor="let head of stepperHeads | slice: sliderProperties.sliceStart : sliderProperties.sliceEnd; let i = index; let isLast = last;">
+      <div class="stepper-header" matRipple [ngClass]="{'active': head.isSelected}" (click)="moveStepper(head.stepperIndex)">
+        <div class="step-icon">
+          <span class="">{{head.icon}}</span>
+        </div>
+        <div class="step-label">{{head.caption}}</div>
+      </div>
+
+      <div class="stepper-horizontal-line" *ngIf="!isLast"></div>
+    </ng-container>
+    <div class="nav-icon-container" matRipple [ngClass]="{'disabled': stepper.selectedIndex === stepperHeads.length - 1}" (click)="nextStep(stepper)">
+      <div class="nav-icon">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <mat-horizontal-stepper #stepper>
+    <mat-step *ngFor="let head of stepperHeads;">
+      <p>{{head.caption}}</p>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

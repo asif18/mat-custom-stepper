@@ -1,0 +1,80 @@
+::ng-deep {
+  .mat-horizontal-stepper-header-container {
+    display: none !important;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+  position: relative;
+  top: 30px;
+}
+
+.stepper-header-container {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+
+  .stepper-header {
+    display: flex;
+    height: 72px;
+    overflow: hidden;
+    align-items: center;
+    padding: 0 24px;
+    outline: 0;
+    cursor: pointer;
+
+    &.active {
+      background-color: darkgrey;
+    }
+
+    .step-icon {
+      margin-right: 8px;
+      flex: none;
+      background-color: #3f51b5;
+      color: rgba(255,255,255,0.87);
+      border-radius: 50%;
+      height: 24px;
+      width: 24px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+
+    .step-label {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 50px;
+      vertical-align: middle;
+    }
+  }
+
+  .stepper-horizontal-line {
+    border-top-width: 1px;
+    border-top-style: solid;
+    flex: auto;
+    height: 0;
+    margin: 0 -16px;
+    min-width: 32px;
+    border-top-color: rgba(0,0,0,0.12);
+  }
+
+  .nav-icon-container {
+    display: flex;
+    align-self: stretch;
+    cursor: pointer;
+    background-color: gray;
+
+    &.disabled {
+      cursor: not-allowed;
+    }
+  
+    .nav-icon {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
