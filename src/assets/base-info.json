@@ -1,0 +1,32 @@
+[
+  {
+    "icon": 1,
+    "caption": "Personal Info",
+    "component": "PersonalInfoComponent"
+  },
+  {
+    "icon": 2,
+    "caption": "Educational Info",
+    "component": "EducationalInfoComponent"
+  },
+  {
+    "icon": 3,
+    "caption": "Offcial Info",
+    "component": "OfficialInfoComponent"
+  },
+  {
+    "icon": 4,
+    "caption": "Vehicle Info",
+    "component": "VehicleInfoComponent"
+  },
+  {
+    "icon": 5,
+    "caption": "Residential Info",
+    "component": "ResidentialInfoComponent"
+  },
+  {
+    "icon": 6,
+    "caption": "Commerical Info",
+    "component": "CommercialInfoComponent"
+  }
+]
