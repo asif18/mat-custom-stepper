@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
 export interface StepperHead {
@@ -13,11 +13,16 @@ export interface StepperHead {
   canEdit?: boolean;
 }
 
+export interface StepCommuteData {
+  currentStepComponent: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService {
 
+  private stepperSubject = new Subject<any>();
   private formState: FormGroup[] = [];
   constructor(private http: HttpClient) { }
 
@@ -27,10 +32,17 @@ export class RegistrationService {
 
   public setStepFormState(formGroup: FormGroup[]): void {
     this.formState = formGroup;
-    console.log(this.formState);
   }
 
   public getStepFormState(): FormGroup[] {
     return this.formState;
+  }
+
+  public triggerStepCommunication(stepCommuteData: StepCommuteData) {
+    this.stepperSubject.next(stepCommuteData);
+  }
+
+  public onStepChange(): Observable<any> {
+    return this.stepperSubject.asObservable();
   }
 }

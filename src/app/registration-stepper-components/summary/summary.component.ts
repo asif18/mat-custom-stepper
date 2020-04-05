@@ -15,6 +15,10 @@ export class SummaryComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService) {}
 
   ngOnInit() {
+    this.registrationService.onStepChange().subscribe(responseData => {
+      console.log(responseData);
+      console.log(this.registrationService.getStepFormState());
+    });
     this.initForm();
   }
 

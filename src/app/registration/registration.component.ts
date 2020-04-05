@@ -84,6 +84,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   private makeHeadSelected(): void {
     map(this.stepperHeads, (head: StepperHead) => head.isSelected = false);
     this.stepperHeads[this.myStepper.selectedIndex].isSelected = true;
+    this.registrationService.triggerStepCommunication({
+      currentStepComponent: this.stepperHeads[this.myStepper.selectedIndex].component
+    });
   }
 
   public onFormSubmit(formGroup: FormGroup): void {
