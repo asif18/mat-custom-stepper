@@ -25,7 +25,7 @@ export class SummaryComponent implements OnInit {
   private initForm(): void {
     this.form = this.formBuilder.group({
       formName: new FormControl(this.constructor.name),
-      agreed: new FormControl(false),
+      agreed: new FormControl(false)
     });
   }
 

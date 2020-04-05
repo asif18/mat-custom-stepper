@@ -8,7 +8,6 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class VehicleInfoComponent implements OnInit {
 
-  @Input() stepInput: any;
   @Output() onFormSubmit: EventEmitter<FormGroup> = new EventEmitter();
   public form: FormGroup;
 
