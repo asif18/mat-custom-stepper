@@ -1,3 +1,19 @@
-<p>
-  educational-info works!
-</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="College Name*" formControlName="collegeName" />
+      <mat-error *ngIf="f.collegeName.errors">Required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Course*" formControlName="course" />
+      <mat-error *ngIf="f.course.errors">Required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button mat-button type="submit" class="btn btn-danger">Submit</button>
+  </div>
+</form>

@@ -15,6 +15,7 @@ import { OfficialInfoComponent } from './registration-stepper-components/officia
 import { VehicleInfoComponent } from './registration-stepper-components/vehicle-info/vehicle-info.component';
 import { ResidentialInfoComponent } from './registration-stepper-components/residential-info/residential-info.component';
 import { CommercialInfoComponent } from './registration-stepper-components/commercial-info/commercial-info.component';
+import { SummaryComponent } from './registration-stepper-components/summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CommercialInfoComponent } from './registration-stepper-components/comme
     OfficialInfoComponent,
     VehicleInfoComponent,
     ResidentialInfoComponent,
-    CommercialInfoComponent
+    CommercialInfoComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ import { CommercialInfoComponent } from './registration-stepper-components/comme
   bootstrap: [AppComponent],
   entryComponents: [
     PersonalInfoComponent, EducationalInfoComponent, OfficialInfoComponent, VehicleInfoComponent, ResidentialInfoComponent,
-    CommercialInfoComponent
+    CommercialInfoComponent, SummaryComponent
   ]
 })
 export class AppModule { }

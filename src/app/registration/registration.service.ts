@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 export interface StepperHead {
   icon: any;
@@ -15,9 +16,18 @@ export interface StepperHead {
 })
 export class RegistrationService {
 
+  private formStates: FormGroup[] = [];
   constructor(private http: HttpClient) { }
 
   public getBaseInfo(): Observable<StepperHead[]> {
     return this.http.get<StepperHead[]>(`assets/base-info.json`);
+  }
+
+  public setStepFormState(formGroup: FormGroup): void {
+    this.formStates.push(formGroup);
+  }
+
+  public getStepFormState(): FormGroup[] {
+    return this.formStates;
   }
 }

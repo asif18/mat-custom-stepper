@@ -28,5 +28,10 @@
     "icon": 6,
     "caption": "Commerical Info",
     "component": "CommercialInfoComponent"
+  },
+  {
+    "icon": 7,
+    "caption": "Summary",
+    "component": "SummaryComponent"
   }
 ]

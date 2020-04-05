@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Subscription } from 'rxjs';
-import { map, assign, forEach } from 'lodash';
+import { map, assign, forEach, size, remove } from 'lodash';
 import { StepperHead, RegistrationService } from './registration.service';
 
 @Component({
@@ -13,11 +14,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
   public stepperHeads: StepperHead[] = [];
-
   public sliderProperties: any = {
     sliceStart: 0,
-    sliceEnd: 5
+    sliceEnd: 3
   };
+  private submittedForms: FormGroup[] = [];
+  public stepInput: any;
 
   @ViewChild('stepper') private myStepper: MatStepper;
 
@@ -80,7 +82,25 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.stepperHeads[this.myStepper.selectedIndex].isSelected = true;
   }
 
+  public onFormSubmit(formGroup: FormGroup): boolean {
+
+    if (size(this.submittedForms) === 0) {
+      this.submittedForms.push(formGroup);
+      return false;
+    }
+
+    forEach(this.submittedForms, (form: FormGroup, index: number) => {
+      const isFormSubmittedAlready = (form.value.formName === this.stepperHeads[this.myStepper.selectedIndex].component);
+      if (isFormSubmittedAlready) {
+        this.submittedForms.splice(0, index);
+      }
+    });
+    this.submittedForms.push(formGroup);
+    console.log(this.submittedForms);
+    return true;
+  }
+
   ngOnDestroy() {
-    forEach(this.subscriptions, subscription => subscription.unsubscribe());
+    forEach(this.subscriptions, (subscription: Subscription) => subscription.unsubscribe());
   }
 }

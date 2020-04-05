@@ -1,8 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 @Component({
   selector: 'app-step-template-base',
   template: '',
 })
-export class StepTemplateBaseComponent {
+export class StepTemplateBaseComponent implements OnInit {
   @Input() data: any;
+
+  ngOnInit() {
+    console.log(this.data);
+  }
 }

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="stepper-header-container">
-    <div class="nav-icon-container" matRipple *ngIf="stepper.selectedIndex !== 0" (click)="prevStep(stepper)">
+    <div class="nav-icon-container" matRipple *ngIf="sliderProperties.sliceStart > 0" (click)="prevStep(stepper)">
       <div class="nav-icon">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </div>
@@ -30,7 +30,7 @@
 
   <mat-horizontal-stepper #stepper>
     <mat-step *ngFor="let head of stepperHeads;">
-      <app-step-item [data]="head"></app-step-item>
+      <app-step-item [data]="head" (onFormSubmit)="onFormSubmit($event)"></app-step-item>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

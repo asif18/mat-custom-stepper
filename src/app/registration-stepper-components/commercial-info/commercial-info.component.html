@@ -1,3 +1,19 @@
-<p>
-  commercial-info works!
-</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Business Name*" formControlName="businessName" />
+      <mat-error *ngIf="f.businessName.errors">Required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Address*" formControlName="address" />
+      <mat-error *ngIf="f.address.errors">Required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button mat-button type="submit" class="btn btn-danger">Submit</button>
+  </div>
+</form>
