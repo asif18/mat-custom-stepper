@@ -29,6 +29,10 @@
       background-color: darkgrey;
     }
 
+    &.disabled {
+      cursor: not-allowed;
+    }
+
     .step-icon {
       margin-right: 8px;
       flex: none;

@@ -6,7 +6,7 @@
       </div>
     </div>
     <ng-container *ngFor="let head of stepperHeads | slice: sliderProperties.sliceStart : sliderProperties.sliceEnd; let i = index; let isLast = last;">
-      <div class="stepper-header" matRipple [ngClass]="{'active': head.isSelected}" (click)="moveStepper(head.stepperIndex)">
+      <div class="stepper-header" matRipple [ngClass]="{'active': head.isSelected, 'disabled': !head.canEdit}" (click)="moveStepper(head)">
         <div class="step-icon">
           <span class="">{{head.icon}}</span>
         </div>
@@ -14,7 +14,7 @@
           {{head.caption}}
           <br/>
           <small class="text-muted">
-            Required
+            {{(head.isSubmitted) ? 'Completed': 'Required'}}
           </small>
         </div>
       </div>

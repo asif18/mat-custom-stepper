@@ -9,6 +9,8 @@ export interface StepperHead {
   component: string;
   stepperIndex?: number;
   isSelected?: boolean;
+  isSubmitted?: boolean;
+  canEdit?: boolean;
 }
 
 @Injectable({
@@ -16,18 +18,19 @@ export interface StepperHead {
 })
 export class RegistrationService {
 
-  private formStates: FormGroup[] = [];
+  private formState: FormGroup[] = [];
   constructor(private http: HttpClient) { }
 
   public getBaseInfo(): Observable<StepperHead[]> {
     return this.http.get<StepperHead[]>(`assets/base-info.json`);
   }
 
-  public setStepFormState(formGroup: FormGroup): void {
-    this.formStates.push(formGroup);
+  public setStepFormState(formGroup: FormGroup[]): void {
+    this.formState = formGroup;
+    console.log(this.formState);
   }
 
   public getStepFormState(): FormGroup[] {
-    return this.formStates;
+    return this.formState;
   }
 }

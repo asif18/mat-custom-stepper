@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { RegistrationService } from '../../registration/registration.service';
 
 @Component({
   selector: 'app-summary',
@@ -11,7 +12,7 @@ export class SummaryComponent implements OnInit {
   @Output() onFormSubmit: EventEmitter<FormGroup> = new EventEmitter();
   public form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService) {}
 
   ngOnInit() {
     this.initForm();

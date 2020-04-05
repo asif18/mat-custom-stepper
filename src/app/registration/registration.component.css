@@ -24,6 +24,9 @@
 .stepper-header-container .stepper-header.active {
   background-color: darkgrey;
 }
+.stepper-header-container .stepper-header.disabled {
+  cursor: not-allowed;
+}
 .stepper-header-container .stepper-header .step-icon {
   margin-right: 8px;
   flex: none;

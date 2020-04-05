@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Subscription } from 'rxjs';
-import { map, assign, forEach, size, remove } from 'lodash';
+import { map, assign, forEach, size, isObject } from 'lodash';
 import { StepperHead, RegistrationService } from './registration.service';
 
 @Component({
@@ -38,15 +38,19 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       this.stepperHeads = forEach(responseData, (head: StepperHead, index: number) => {
         assign(head, {
          stepperIndex: index,
-         isSelected: (index === 0)
+         isSelected: (index === 0),
+         canEdit: (index === 0),
+         isSubmitted: false
        });
      });
     }));
   }
 
-  public moveStepper(index: number): void {
-    this.myStepper.selectedIndex = index;
-    this.makeHeadSelected();
+  public moveStepper(stepperHead: StepperHead): void {
+    if (stepperHead.canEdit) {
+      this.myStepper.selectedIndex = stepperHead.stepperIndex;
+      this.makeHeadSelected();
+    }
   }
 
   public prevStep(stepper: MatStepper): void {
@@ -82,22 +86,29 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.stepperHeads[this.myStepper.selectedIndex].isSelected = true;
   }
 
-  public onFormSubmit(formGroup: FormGroup): boolean {
-
-    if (size(this.submittedForms) === 0) {
-      this.submittedForms.push(formGroup);
-      return false;
-    }
-
+  public onFormSubmit(formGroup: FormGroup): void {
+    // If form is submitted already and user changes the values and submits again then remove the old and push new
     forEach(this.submittedForms, (form: FormGroup, index: number) => {
-      const isFormSubmittedAlready = (form.value.formName === this.stepperHeads[this.myStepper.selectedIndex].component);
+      const isFormSubmittedAlready = (form.value.formName === formGroup.value.formName);
       if (isFormSubmittedAlready) {
-        this.submittedForms.splice(0, index);
+        this.submittedForms.splice(index, 1);
       }
     });
+
     this.submittedForms.push(formGroup);
-    console.log(this.submittedForms);
-    return true;
+
+    // Save into service to get form values at any time in any place
+    this.registrationService.setStepFormState(this.submittedForms);
+
+    // Once the form is submitted, set the current active steps isSubmitted = true
+    this.stepperHeads[this.myStepper.selectedIndex].isSubmitted = true;
+
+    // Make next step form as editable once current step is submitted
+    if (isObject(this.stepperHeads[this.myStepper.selectedIndex + 1])) {
+      this.stepperHeads[this.myStepper.selectedIndex + 1].canEdit = true;
+      // automatically move to next step
+      this.nextStep(this.myStepper);
+    }
   }
 
   ngOnDestroy() {
